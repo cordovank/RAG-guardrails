@@ -1,0 +1,29 @@
+Which five boroughs make up New York City?; New_York_City,Manhattan,Brooklyn,Queens,The_Bronx,Staten_Island
+Iconic free ferry ride with skyline views?; Staten_Island,New_York_City
+Best neighborhoods to explore in Manhattan?; Manhattan
+Areas known for brownstone streets and indie shops in Brooklyn?; Brooklyn
+Major airports serving NYC?; New_York_City
+How to get around NYC late at night?; New_York_City
+Is tap water generally safe to drink in NYC?; New_York_City
+Where are popular arts museums and Broadway theaters?; Manhattan
+Parks or waterfront spots with skyline views in Queens?; Queens
+Historic attractions and baseball stadium in the Bronx?; The_Bronx
+Quiet suburban feel and ferry connections info?; Staten_Island
+Best views of Manhattan skyline from New Jersey?; Jersey_City,Hoboken,Fort_Lee
+How to take PATH trains into Manhattan?; Jersey_City,Hoboken
+Where is Liberty State Park and what to do there?; Jersey_City
+Where to find Hoboken’s waterfront promenades and bars?; Hoboken
+Beaches and boardwalk towns along the Atlantic coast of NJ?; Jersey_Shore
+Which bridge connects Fort Lee to Manhattan?; Fort_Lee
+Public transit options from Newark Airport into NYC?; Newark,New_York_City
+University town with collegiate architecture and museums in NJ?; Princeton
+Historic waterfall attraction in northern NJ?; Paterson
+Family-friendly beaches near NYC on the NJ side?; Jersey_Shore
+Where to catch ferries to Statue of Liberty from NJ?; Jersey_City
+Dining scenes and Italian eateries near Washington Street?; Hoboken
+Neighborhoods in Brooklyn known for nightlife?; Brooklyn
+Which NYC borough includes Yankee Stadium?; The_Bronx
+Museum Mile and Central Park access details?; Manhattan
+Safety tips and common scams to avoid in tourist areas?; New_York_City
+Public transport passes accepted across NYC subways and buses?; New_York_City
+Good locations in Queens to spot planes or visit Flushing Meadows?; Queens

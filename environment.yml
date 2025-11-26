@@ -1,0 +1,35 @@
+name: rag
+channels:
+  - conda-forge
+dependencies:
+  # --- Core interpreter ---
+  - python=3.10
+
+  # --- Compiled stack (conda owns these to avoid ABI issues) ---
+  - numpy=1.26.*          # <2 to match faiss/scipy/sklearn
+  - scipy=1.11.*          # compatible with NumPy 1.26
+  - scikit-learn=1.4.*    # compatible with NumPy 1.26
+  - pandas=2.2.*          # compiled via conda
+  - trafilatura=2.0.*     # compiled via conda
+  - faiss-cpu=1.8.*       # osx-arm64 build
+  - certifi
+  - pycparser
+
+  # --- Pip for pure-Python deps (these won't upgrade NumPy) ---
+  - pip
+  - pip:
+      - fastapi
+      - uvicorn
+      - pydantic
+      - sentence-transformers>=2.6,<6
+      - rank-bm25
+      - transformers==4.57.0
+      - ragas==0.3.6
+      - datasets==4.1.1
+      - prometheus-client
+      - opentelemetry-instrumentation-fastapi
+      - mlflow==3.4.0
+      - python-dotenv
+      - pytest
+      # Optional: alternative ANN backend if FAISS ever misbehaves
+      # - hnswlib

@@ -1,0 +1,29 @@
+{"question": "Which five boroughs make up New York City?", "doc_contains": ["New_York_City", "Manhattan", "Brooklyn", "Queens", "The_Bronx", "Staten_Island"]}
+{"question": "Iconic free ferry ride with skyline views?", "doc_contains": ["Staten_Island", "New_York_City"]}
+{"question": "Best neighborhoods to explore in Manhattan?", "doc_contains": ["Manhattan"]}
+{"question": "Areas known for brownstone streets and indie shops in Brooklyn?", "doc_contains": ["Brooklyn"]}
+{"question": "Major airports serving NYC?", "doc_contains": ["New_York_City"]}
+{"question": "How to get around NYC late at night?", "doc_contains": ["New_York_City"]}
+{"question": "Is tap water generally safe to drink in NYC?", "doc_contains": ["New_York_City"]}
+{"question": "Where are popular arts museums and Broadway theaters?", "doc_contains": ["Manhattan"]}
+{"question": "Parks or waterfront spots with skyline views in Queens?", "doc_contains": ["Queens"]}
+{"question": "Historic attractions and baseball stadium in the Bronx?", "doc_contains": ["The_Bronx"]}
+{"question": "Quiet suburban feel and ferry connections info?", "doc_contains": ["Staten_Island"]}
+{"question": "Best views of Manhattan skyline from New Jersey?", "doc_contains": ["Jersey_City", "Hoboken", "Fort_Lee"]}
+{"question": "How to take PATH trains into Manhattan?", "doc_contains": ["Jersey_City", "Hoboken"]}
+{"question": "Where is Liberty State Park and what to do there?", "doc_contains": ["Jersey_City"]}
+{"question": "Where to find Hoboken’s waterfront promenades and bars?", "doc_contains": ["Hoboken"]}
+{"question": "Beaches and boardwalk towns along the Atlantic coast of NJ?", "doc_contains": ["Jersey_Shore"]}
+{"question": "Which bridge connects Fort Lee to Manhattan?", "doc_contains": ["Fort_Lee"]}
+{"question": "Public transit options from Newark Airport into NYC?", "doc_contains": ["Newark", "New_York_City"]}
+{"question": "University town with collegiate architecture and museums in NJ?", "doc_contains": ["Princeton"]}
+{"question": "Historic waterfall attraction in northern NJ?", "doc_contains": ["Paterson"]}
+{"question": "Family-friendly beaches near NYC on the NJ side?", "doc_contains": ["Jersey_Shore"]}
+{"question": "Where to catch ferries to Statue of Liberty from NJ?", "doc_contains": ["Jersey_City"]}
+{"question": "Dining scenes and Italian eateries near Washington Street?", "doc_contains": ["Hoboken"]}
+{"question": "Neighborhoods in Brooklyn known for nightlife?", "doc_contains": ["Brooklyn"]}
+{"question": "Which NYC borough includes Yankee Stadium?", "doc_contains": ["The_Bronx"]}
+{"question": "Museum Mile and Central Park access details?", "doc_contains": ["Manhattan"]}
+{"question": "Safety tips and common scams to avoid in tourist areas?", "doc_contains": ["New_York_City"]}
+{"question": "Public transport passes accepted across NYC subways and buses?", "doc_contains": ["New_York_City"]}
+{"question": "Good locations in Queens to spot planes or visit Flushing Meadows?", "doc_contains": ["Queens"]}
