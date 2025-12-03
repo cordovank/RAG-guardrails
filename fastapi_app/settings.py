@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     max_passage_chars: int = 2000
     max_snippet_chars: int = 200
     max_response_length: int = 500
-    enable_self_check: bool = False
+    enable_self_check: bool = True
     llm_choice: str = "ollama"  # Options: "ollama", "custom"
 
 # OLLAMA settings

@@ -25,6 +25,8 @@ from collections import OrderedDict
 from .governance import enforce
 from .llm import ollama_openai as default, custom_llm_openai as custom
 from fastapi_app.settings import settings as set
+from fastapi_app.checks import check_answer
+
 
 # App settings
 MAX_SNIPPET_CHARS = set.max_snippet_chars
@@ -84,6 +86,7 @@ def _format_citations(passages: List[Dict[str, Any]]) -> Tuple[List[Dict[str, An
       - snippet: a brief excerpt from the passage (truncated to max_snippet_chars)
       - score: passage relevance score
       - passage_index: index of the passage in the original passages list
+      - url_fragment: URL fragment for the passage (if applicable)
 
     A citation map is a mapping of numeric strings to passage ids, e.g. {"1": "doc1#0", "2": "doc2#1"}
 
@@ -147,27 +150,37 @@ def _build_context(citations_info: Tuple[List[Dict[str, Any]], Dict[str, str]]) 
 
 
 def _build_prompt(context: str, query: str, max_tokens: int) -> str:
-    """ Return a clear prompt instructing the LLM to:
-     - only use the provided context.
-     - use numeric inline citations (e.g., [1]),
-     - abstain with "I don't know." if information is missing.
+    """ Build a prompt that forces:
+    - use ONLY provided CONTEXT
+    - numeric citations [1], [2], ...
+    - abstain with "I don't know."
+    - JSON-only output: {"answer": "...", "used_citation_numbers": ["1","2"]}
     """
     system_str = (
-        "You are an assistant that must answer the user's question using ONLY the provided passages."
-        " If the passages don't contain the information needed to answer, respond exactly: 'I don't know.'"
+        "You are an assistant that MUST answer the user's QUESTION using ONLY the provided CONTEXT PASSAGES.\n"
+        "If the CONTEXT does NOT contain the information needed to answer, you MUST respond: \"I don't know.\"\n"
+        "Do NOT use external knowledge. "
+        "Do NOT fabricate facts, reasoning, or citations."
     )
 
     instruct = (
-        "Respond concisely. Cite supporting passages inline using numeric citations like [1], [2]."
-        " Do NOT invent citations; only use numbers shown in the CONTEXT."
-        f"\nLimit the answer to {max_tokens} characters if longer."
+        "Instructions:\n"
+        "1. Respond concisely using ONLY information found in the CONTEXT.\n"
+        "2. Cite supporting passages using numeric inline citations like [1], [2].\n"
+        "3. Place citations immediately after the sentence they support.\n"
+        "4. Use ONLY citations for passages that actually contain the referenced information.\n"
+        "5. If the answer is not fully supported by the CONTEXT, respond EXACTLY: \"I don't know.\"\n"
+        "6. Do NOT invent citations, details, or assumptions.\n"
+        f"7. Limit the final answer to {max_tokens} characters if longer."
     )
 
     return (
         system_str
+        + "\n\nCONTEXT PASSAGES:\n"
+        + context
+        + "\n\nQUESTION:\n"
+        + query
         + "\n\n"
-        + f"CONTEXT:\n{context}\n\n"
-        + f"QUESTION:\n{query}\n\n"
         + instruct
     )
 
@@ -239,21 +252,26 @@ def _build_response(final_answer: str, citation_info: Tuple[List[Dict[str, Any]]
     }
 
 
-def self_check_answer(raw_answer, passages, query: str, enable_self_check: bool, check_fn: Optional[Callable[[str, str, List[Dict[str, Any]]], Optional[str]]] = None) -> str:
-    """TODO self-check logic.
+def self_check_answer(raw_answer, citation_info, enable_self_check: bool, llm_fn: Optional[Callable[[str], str]] = None) -> str:
+    """
+    Self-check mechanism to validate and potentially correct the generated answer.
+    If enable_self_check is True, the provided check_fn is called with (query, answer, passages).
+    If check_fn returns a non-empty corrected answer different from raw_answer, it is used as
+    the final answer.
 
-    This function can be expanded to analyze the answer and determine if corrections are needed.
-    For now, it simply returns None, indicating no correction.
+    Returns the final answer (either original or corrected).
     """
     final_answer = raw_answer
     if enable_self_check:
-        if check_fn is not None:
-            try:
-                corrected = check_fn(query, raw_answer, passages)
-                if corrected and isinstance(corrected, str) and corrected.strip() and corrected.strip() != raw_answer.strip():
-                    final_answer = corrected
-            except Exception:
-                logger.debug("Self-check failed; proceeding with original answer", exc_info=True)
+        logger.debug("Running self-check on answer")
+        try:
+            output = check_answer(raw_answer, citation_info, llm_fn)
+            corrected_ans, meta = output
+            logger.debug("Self-check result: corrected=%s, meta=%s", corrected_ans, meta)
+            if corrected_ans and isinstance(corrected_ans, str) and corrected_ans.strip() and corrected_ans.strip() != raw_answer.strip():
+                final_answer = corrected_ans
+        except Exception:
+            logger.debug("Self-check failed; proceeding with original answer", exc_info=True)
 
     return final_answer
 
@@ -264,7 +282,6 @@ def synthesize_answer(
     enable_self_check: bool = False,
     llm_choice: Optional[str] = None,
     max_tokens: Optional[int] = None,
-    check_fn: Optional[Callable[[str, str, List[Dict[str, Any]]], Optional[str]]] = None,
 ) -> Dict[str, Any]:
     """Synthesize an answer from the query and retrieved passages.
 
@@ -274,7 +291,6 @@ def synthesize_answer(
       - enable_self_check: if True, run check_fn to optionally correct the answer
       - llm_choice: "ollama" or "custom" to select the LLM backend
       - max_tokens: max tokens/characters for the LLM response
-      - check_fn: callable(query, answer, passages) -> corrected_answer or None
 
     Returns a dict with either 'answer' and 'citations' or an 'error' object.
     """
@@ -293,7 +309,7 @@ def synthesize_answer(
     raw_answer = llm_fn(prompt=prompt, max_tokens=max_tokens)
 
     # 4. Optional self-check (non-fatal)
-    final_answer = self_check_answer(raw_answer, passages, query, enable_self_check, check_fn)
+    final_answer = self_check_answer(raw_answer, citation_info, enable_self_check, llm_fn)
 
     # 5. Governance enforcement on LLM output (may raise or return error)
     try:
