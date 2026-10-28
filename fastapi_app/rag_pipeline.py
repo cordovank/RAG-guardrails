@@ -1,3 +1,5 @@
+# fastapi_app/rag_pipeline.py
+
 from .governance import enforce
 from .retrieval import hybrid_search
 from .answerer import synthesize_answer

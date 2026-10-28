@@ -1,3 +1,5 @@
+# fastapi_app/retrieval.py
+
 """
 Hybrid Retrieval: BM25 + FAISS + RRF + MMR
 

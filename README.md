@@ -240,7 +240,11 @@ The generated answers include inline citations in a consistent format (e.g., [1]
 A self-correction mechanism is implemented to verify and refine the generated answers.
 
 ### Self-Correction Mechanism
-To ensure the accuracy of the generated answers, we verify the generated answer against the retrieved passages and make adjustments if necessary. Scope for future improvement includes using RAGAS or similar techniques for faithfulness checking.
+To ensure the accuracy of the generated answers, we verify the generated answer against the retrieved passages and make adjustments if necessary. If the answer lacks citations for certain claims, we can either prompt the language model to revise the answer or flag it for review. This mechanism helps maintain the integrity of the information provided, reducing the risk of hallucinations or unsupported statements.
+
+The self-correction mechanism can be further enhanced in future iterations by incorporating more sophisticated techniques, such as cross-referencing with additional data sources or employing fact-checking algorithms.
+
+Scope for future improvement includes using RAGAS or similar techniques for faithfulness checking.
 
 ### Output
 The output of the answer generation function is a structured response containing the generated answer and a list of citations. 

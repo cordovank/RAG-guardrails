@@ -1,3 +1,4 @@
+# index/fetcher.py
 """
 Create a JSONL data file by fetching and cleaning web pages from a list of URLs.
 This is designed for predefined domains (e.g., "Travel & Places" - Wikivoyage - NYC).

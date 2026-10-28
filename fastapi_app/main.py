@@ -1,3 +1,5 @@
+# fastapi_app/main.py
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import Response, JSONResponse
 from prometheus_client import Histogram, Counter, generate_latest, CONTENT_TYPE_LATEST
@@ -17,6 +19,10 @@ REQS     = Counter("requests_total", "Total requests", ["route"])
 
 # FastAPI app
 app = FastAPI(title="Prod RAG with Guardrails (scaffold)")
+
+@app.get("/ping")
+def pong():
+    return {"ping": "pong!"}
 
 @app.get("/health")
 def health():

@@ -1,3 +1,4 @@
+# fastapi_app/settings.py
 """Application settings.
 
 Pydantic moved ``BaseSettings`` into the ``pydantic-settings`` package starting

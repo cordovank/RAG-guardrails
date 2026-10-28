@@ -1,3 +1,5 @@
+# fastapi_app/llm/custom_llm_openai.py
+
 """
 Custom LLM integration using OpenAI-compatible API.
 

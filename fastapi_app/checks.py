@@ -1,3 +1,5 @@
+# fastapi_app/check.py
+
 """
 Conservative self-check function for validating generated answers against retrieved passages.
 Intended to be used with the answerer.synthesize_answer's enable_self_check and check_fn parameters.

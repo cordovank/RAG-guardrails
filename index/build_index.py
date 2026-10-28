@@ -1,3 +1,5 @@
+# index/build_index.py
+
 # Heading-aware chunking, embeddings, FAISS.
 # This file will build and persist indexes under index/faiss_store
 
