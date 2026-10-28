@@ -18,6 +18,10 @@ REQS     = Counter("requests_total", "Total requests", ["route"])
 # FastAPI app
 app = FastAPI(title="Prod RAG with Guardrails (scaffold)")
 
+@app.get("/ping")
+def pong():
+    return {"ping": "pong!"}
+
 @app.get("/health")
 def health():
     return {"ok": True}

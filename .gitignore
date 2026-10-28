@@ -1,0 +1,70 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment files / secrets
+.env
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Type check / cache
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Database files (optional)
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# IDEs / editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+
+# Temp files
+*.tmp
+*.bak
+*.swp
+
+# Local/internal docs (do not commit)
+docs/
+
+
+
+# Keep project metadata and lockfile committed for reproducible installs
+# - Do NOT ignore: pyproject.toml, poetry.lock, uv.lock, README.md
